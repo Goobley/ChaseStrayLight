@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 cube = load_cube("RSM20240303T130012_0021_HA.fits")
-coord = SkyCoord(-540 * u.arcsec, -845 * u.arcsec, frame=frames.Helioprojective)
+coord = SkyCoord(-845 * u.arcsec, -540 * u.arcsec, frame=frames.Helioprojective)
 uncleaned = np.copy(cube[:, *cube[71].wcs.world_to_array_index(coord)].data)
 
 
@@ -19,7 +19,8 @@ cleaned = np.copy(cube[:, *cube[71].wcs.world_to_array_index(coord)].data)
 plt.ion()
 fig, ax = plt.subplot_mosaic("AB", per_subplot_kw={"A": {"projection": cube[71].wcs}})
 cube[71].plot(axes=ax["A"])
-lims = cube[71].wcs.world_to_pixel(SkyCoord([-600, -500]*u.arcsec, [-860, -800]*u.arcsec, frame=frames.Helioprojective))
+# lims = cube[71].wcs.world_to_pixel(SkyCoord([-600, -500]*u.arcsec, [-860, -800]*u.arcsec, frame=frames.Helioprojective))
+lims = cube[71].wcs.world_to_pixel(SkyCoord([-860, -800]*u.arcsec, [-600, -500]*u.arcsec, frame=frames.Helioprojective))
 ax["A"].set_xlim(*lims[0])
 ax["A"].set_ylim(*lims[1])
 ax["A"].plot_coord(coord, "rx")

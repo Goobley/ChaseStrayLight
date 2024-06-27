@@ -22,8 +22,8 @@ def load_cube(path: Union[str, bytes, os.PathLike], unit: Optional[u.Unit] = u.D
     """
 
     data = fits.open(path)
-    data[1].header["CTYPE1"] = "HPLT-TAN"
-    data[1].header["CTYPE2"] = "HPLN-TAN"
+    data[1].header["CTYPE1"] = "HPLN-TAN"
+    data[1].header["CTYPE2"] = "HPLT-TAN"
     data[1].header["CTYPE3"] = "WAVE"
     del data[1].header["RSUN_REF"]
     wcs = WCS(data[1].header)
